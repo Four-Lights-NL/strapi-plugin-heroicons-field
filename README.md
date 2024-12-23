@@ -22,6 +22,7 @@
 </p>
 
 <p align="center">
+  <a href="#compatibility">Compatibility</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#credits">Credits</a> •
@@ -29,6 +30,11 @@
 </p>
 
 ![screenshot](./.github/screenshot.gif)
+
+## Compatability
+
+- **Strapi v5**: v1.0 and later
+- **Strapi v4**: v0.0.5 and earlier
 
 ## Key Features
 

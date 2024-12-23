@@ -8,17 +8,14 @@ import {
   SearchForm,
   Searchbar,
   Typography,
-  ModalLayout,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
+  Modal,
 } from '@strapi/design-system';
 import * as miniIcons from '@heroicons/react/20/solid';
 import * as outlineIcons from '@heroicons/react/24/outline';
 import * as solidIcons from '@heroicons/react/24/solid';
 import styled from 'styled-components';
 
-const IconWraper = styled.button`
+const IconWrapper = styled.button`
   margin: ${({ theme }) => theme.spaces[2]};
   color: ${({ theme }) => theme.colors.neutral900};
   display: inline-block;
@@ -46,13 +43,13 @@ const IconsModal = ({ closeModal, setSelectedIcon, name, onChange, searchbarRef 
   }, [query, selectedIconLibrary]);
 
   return (
-    <ModalLayout onClose={closeModal} labelledBy="title">
-      <ModalHeader>
+    <Modal.Content onClose={closeModal} labelledBy="title">
+      <Modal.Header>
         <Typography fontWeight="bold" textColor="neutral800" as="h2" id="title">
           Select an icon
         </Typography>
-      </ModalHeader>
-      <ModalBody>
+      </Modal.Header>
+      <Modal.Body>
         <SearchForm style={{ marginBottom: '1rem' }}>
           <Searchbar
             name="searchbar"
@@ -68,7 +65,7 @@ const IconsModal = ({ closeModal, setSelectedIcon, name, onChange, searchbarRef 
         </SearchForm>
 
         {filteredIcons.map(([iconName, Icon]) => (
-          <IconWraper
+          <IconWrapper
             key={iconName}
             onClick={() => {
               setSelectedIcon({
@@ -92,10 +89,10 @@ const IconsModal = ({ closeModal, setSelectedIcon, name, onChange, searchbarRef 
               title={iconName}
               height={selectedIconLibrary === 'mini' ? '20px' : '24px'}
             />
-          </IconWraper>
+          </IconWrapper>
         ))}
-      </ModalBody>
-      <ModalFooter
+      </Modal.Body>
+      <Modal.Footer
         startActions={
           <SingleSelect
             minWidth={600}
@@ -110,12 +107,11 @@ const IconsModal = ({ closeModal, setSelectedIcon, name, onChange, searchbarRef 
         }
         endActions={
           <>
-            {/* <Button variant="secondary">Add new stuff</Button> */}
             <Button onClick={closeModal}>Finish</Button>
           </>
         }
       />
-    </ModalLayout>
+    </Modal.Content>
   );
 };
 

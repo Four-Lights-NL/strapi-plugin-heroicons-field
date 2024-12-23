@@ -3,13 +3,7 @@ import React, { useState, useRef } from 'react';
 import IconsModal from './IconsModal';
 import {
   Field,
-  FieldError,
-  FieldHint,
-  FieldInput,
-  FieldAction,
-  FieldLabel,
   Flex,
-  Icon,
 } from '@strapi/design-system';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
@@ -18,7 +12,7 @@ import { Cross, Search } from '@strapi/icons';
 import getTrad from '../../utils/getTrad';
 import styled from "styled-components"
 
-const IconWraper = styled.div`
+const IconWrapper = styled.div`
   height: 1rem;
   width: 1rem;
   color: ${({ theme }) => theme.colors.neutral900};
@@ -66,8 +60,8 @@ const IconPickerField = ({
       required={required}
     >
       <Flex direction="column" alignItems="stretch" gap={1}>
-        <FieldLabel action={labelAction}>{formatMessage(intlLabel)}</FieldLabel>
-        <FieldInput
+        <Field.Label action={labelAction}>{formatMessage(intlLabel)}</Field.Label>
+        <Field.Input
           type="text"
           id="icon-picker-value"
           value={selectedIcon?.name ?? ''}
@@ -76,28 +70,23 @@ const IconPickerField = ({
           onClick={openModal}
           disabled={disabled}
           startAction={
-            <FieldAction
+            <Field.Action
               onClick={openModal}
               label="open icon picker"
             >
               {selectedIcon ? (
-                <IconWraper dangerouslySetInnerHTML={{ __html: selectedIcon.component }} />
+                <IconWrapper dangerouslySetInnerHTML={{ __html: selectedIcon.component }} />
               ) : (
-                <Icon
-                  colors={(theme) => ({
-                    path: {
-                      fill: theme.colors.neutral500,
-                    },
-                  })}
-                  as={Search}
+                <Search
+                  fill={theme.colors.neutral500}
                   height="0.85rem"
                 />
               )}
-            </FieldAction>
+            </Field.Action>
           }
           endAction={
             selectedIcon && (
-              <FieldAction
+              <Field.Action
                 onClick={() => {
                   setSelectedIcon(null)
                   onChange({
@@ -110,16 +99,11 @@ const IconPickerField = ({
                 }}
                 label="reset icon picker"
               >
-                <Icon
-                  colors={(theme) => ({
-                    path: {
-                      fill: theme.colors.neutral500,
-                    },
-                  })}
-                  as={Cross}
+                <Cross
+                  fill={theme.colors.neutral500}
                   height="0.85rem"
                 />
-              </FieldAction>
+              </Field.Action>
             )
           }
           aria-label={formatMessage({
@@ -139,8 +123,8 @@ const IconPickerField = ({
             searchbarRef={searchbarRef}
           />
         )}
-        <FieldHint />
-        <FieldError />
+        <Field.Hint />
+        <Field.Error />
       </Flex>
     </Field>
   );
